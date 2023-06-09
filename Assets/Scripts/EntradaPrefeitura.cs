@@ -6,48 +6,48 @@ using UnityEngine.SceneManagement;
 public class EntradaPrefeitura : MonoBehaviour
 {
     public string cena;
-    private ClockUI clockUI;
-    public float time;
-    public int closeTime;
-    public GameObject foraDeFuncionamentoPanel;
+    private bool canEnterScene = false;
+    public GameObject Button;
+    public GameObject player;
 
     private void Awake()
     {
-        clockUI = FindObjectOfType<ClockUI>();
-        foraDeFuncionamentoPanel.SetActive(false);
+        Button.SetActive(false);
     }
 
     // Start is called before the first frame update
     void Update()
     {
-        if (clockUI != null)
-        {
-            time = clockUI.dayTime;
-        }
+
 
 
     }
 
-    void OnTriggerEnter2D(Collider2D Entrada)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (time <= closeTime)
+        if (other.CompareTag("Player"))
         {
-
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                SceneManager.LoadScene(cena);
-                foraDeFuncionamentoPanel.SetActive(false);
-            }
+            canEnterScene = true;
+            Button.SetActive(true);
         }
-        else
-        {
-            foraDeFuncionamentoPanel.SetActive(true);
-        }
-
     }
 
-    public void ExitPanel()
+    private void OnTriggerExit2D(Collider2D other)
     {
-        foraDeFuncionamentoPanel.SetActive(false);
+        if (other.CompareTag("Player"))
+        {
+            canEnterScene = false;
+            Button.SetActive(false);
+        }
     }
+
+    public void OnButtonClick()
+    {
+        if (canEnterScene)
+        {
+            SceneManager.LoadScene(cena);
+        }
+    }
+
 }
