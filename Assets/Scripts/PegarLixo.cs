@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PegarLixo : MonoBehaviour
 {
     public GameObject PegarBtn;
-
+    public Button button;
     public BotaoPegarLixo botaoPegarLixo;
+    private GameObject objetoLixo;
 
 
 
@@ -29,15 +31,26 @@ public class PegarLixo : MonoBehaviour
             Destroy(this.gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        PegarBtn.SetActive(true);
-        botaoPegarLixo.ConfigurarBotao(gameObject);
+        if (other.CompareTag("Player"))
+        {
+            PegarBtn.SetActive(true);
+            objetoLixo = other.gameObject;
+            botaoPegarLixo = PegarBtn.GetComponent<BotaoPegarLixo>();
+
+            button.onClick = new Button.ButtonClickedEvent();
+            button.onClick.AddListener(() => OnButtonLixo());
+        }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        PegarBtn.SetActive(false);
-        botaoPegarLixo.ConfigurarBotao(null);
+        if (other.CompareTag("Player"))
+        {
+            PegarBtn.SetActive(false);
+            objetoLixo = null;
+            botaoPegarLixo = null;
+        }
     }
 }

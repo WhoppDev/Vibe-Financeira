@@ -1,19 +1,22 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class BotaoPegarLixo : MonoBehaviour
 {
-    private GameObject objetoLixo;
+    [System.Serializable]
+    public class LixoEvent : UnityEvent<GameObject> { }
 
-    public void ConfigurarBotao(GameObject lixo)
-    {
-        objetoLixo = lixo;
-    }
+    public LixoEvent onPegarLixo;
+    public Button botao1;
 
-    public void OnButtonPegarLixo()
+    public void OnButtonPegarLixo(GameObject lixo)
     {
-        if (objetoLixo != null)
+        if (lixo != null)
         {
-            Destroy(objetoLixo);
+            // Faça o que for necessário com o objeto de lixo recebido
+            Debug.Log("Lixo recebido: " + lixo.name);
+            onPegarLixo.Invoke(lixo);
         }
     }
 }
