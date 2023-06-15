@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer sprite;
     private Animator anim;
 
+    public int dinheiro;
+
     public FixedJoystick moveJoystick;
 
     private GameManager gameManager; // Referência ao GameManager
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
             moveJoystick = GameObject.Find("Movimento").GetComponent<FixedJoystick>();
+            gameManager = FindObjectOfType<GameManager>();
         }
         else
         {
@@ -51,7 +54,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-
 
         moveInput.x = moveJoystick.Horizontal;
         moveInput.y = moveJoystick.Vertical;
