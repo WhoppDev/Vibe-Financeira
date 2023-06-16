@@ -6,10 +6,12 @@ public class BtnEntretenimento : MonoBehaviour
 {
     public GameObject entretenimentoBtn;
     private EntretenimentoManager EM;
+    private GameManager GM;
 
     private void Start()
     {
         EM = FindObjectOfType<EntretenimentoManager>();
+        GM = FindObjectOfType<GameManager>();
         entretenimentoBtn.SetActive(false);
     }
 
@@ -32,5 +34,7 @@ public class BtnEntretenimento : MonoBehaviour
     public void OnButtonClick()
     {
         EM.FillBar();
+        GM.dinheiro -= 8;
+
     }
 }

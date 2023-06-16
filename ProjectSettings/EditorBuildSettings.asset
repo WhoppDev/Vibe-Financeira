@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SegundoMapa.unity
     guid: 5e5ee6776cfc67d43bdf7b146dc89830
+  - enabled: 1
+    path: Assets/Scenes/Inicial.unity
+    guid: 47e2a4fab77fda64ba57339b1d5ee5ed
   m_configObjects: {}

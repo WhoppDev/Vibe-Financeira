@@ -5,10 +5,12 @@ using UnityEngine;
 public class ProfissaoManager : MonoBehaviour
 {
     public GameObject EventoLixo;
+    public GameObject lixoBtn;
 
     private void Start()
     {
         EventoLixo.SetActive(false);
+        lixoBtn.SetActive(false);
     }
 
 #region Coletor

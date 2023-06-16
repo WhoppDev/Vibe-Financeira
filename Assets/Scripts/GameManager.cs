@@ -7,10 +7,12 @@ using Cinemachine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    private string playerNickname;
+
     public CinemachineVirtualCamera virtualCamera;
     public GameObject player;
 
-    public HUDManager hudManager;
+    public HUDManager MoneyHud;
 
     public int dinheiro;
 
@@ -35,13 +37,14 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        playerNickname = PlayerData.instance.playerNickname;
 
-        hudManager = FindObjectOfType<HUDManager>();
+        MoneyHud = FindObjectOfType<HUDManager>();
     }
 
     private void Update()
     {
-        hudManager.moneyText.text = dinheiro.ToString();
+        MoneyHud.moneyText.text = dinheiro.ToString();
 
 
     }

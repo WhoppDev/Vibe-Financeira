@@ -10,38 +10,35 @@ public class PegarLixo : MonoBehaviour
     public BotaoPegarLixo botaoPegarLixo;
     private GameObject objetoLixo;
 
+    private bool pegueioLixo = false;
+
     private EntretenimentoManager EM;
     private GameManager gm;
 
-
-
-    // Start is called before the first frame update
     void Start()
     {
-        PegarBtn.SetActive(false);
         EM = FindObjectOfType<EntretenimentoManager>();
         gm = FindObjectOfType<GameManager>();
-
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        pegueioLixo = false;
     }
 
     public void OnButtonLixo()
     {
+
         gameObject.SetActive(false);
-        if(EM.valorEntretenimento <= 0.25)
+
+        if(pegueioLixo == false)
         {
-            gm.dinheiro += 5;
+            if (EM.valorEntretenimento <= 0.25)
+            {
+                gm.dinheiro += 5;
+            }
+            else
+            {
+                gm.dinheiro += 10;
+            }
         }
-        else
-        {
-            gm.dinheiro += 10;
-        }
+        pegueioLixo = true;
 
     }
 
