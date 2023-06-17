@@ -5,20 +5,26 @@ using UnityEngine.UI;
 
 public class PegarLixo : MonoBehaviour
 {
-    public GameObject PegarBtn;
-    public Button button;
     public BotaoPegarLixo botaoPegarLixo;
     private GameObject objetoLixo;
 
     private bool pegueioLixo = false;
+    private Button buttonComponent;
 
     private EntretenimentoManager EM;
-    private GameManager gm;
+    private GameManager GM;
 
-    void Start()
+    void Awake()
     {
         EM = FindObjectOfType<EntretenimentoManager>();
-        gm = FindObjectOfType<GameManager>();
+        GM = FindObjectOfType<GameManager>();
+
+        GM.lixoBtn.GetComponent<Button>();
+
+        buttonComponent = GM.lixoBtn.GetComponent<Button>();
+
+        buttonComponent.onClick.AddListener(OnButtonLixo);
+
         pegueioLixo = false;
     }
 
@@ -31,11 +37,11 @@ public class PegarLixo : MonoBehaviour
         {
             if (EM.valorEntretenimento <= 0.25)
             {
-                gm.dinheiro += 5;
+                GM.dinheiro += 5;
             }
             else
             {
-                gm.dinheiro += 10;
+                GM.dinheiro += 10;
             }
         }
         pegueioLixo = true;
@@ -46,12 +52,11 @@ public class PegarLixo : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PegarBtn.SetActive(true);
+            GM.lixoBtn.SetActive(true);
             objetoLixo = other.gameObject;
-            botaoPegarLixo = PegarBtn.GetComponent<BotaoPegarLixo>();
 
-            button.onClick = new Button.ButtonClickedEvent();
-            button.onClick.AddListener(() => OnButtonLixo());
+            buttonComponent.onClick = new Button.ButtonClickedEvent();
+            buttonComponent.onClick.AddListener(() => OnButtonLixo());
         }
     }
 
@@ -59,7 +64,7 @@ public class PegarLixo : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            PegarBtn.SetActive(false);
+            GM.lixoBtn.SetActive(false);
             objetoLixo = null;
             botaoPegarLixo = null;
         }

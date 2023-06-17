@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CelularHud : MonoBehaviour
 {
+    public static CelularHud instance;
+
     public GameObject hudGeral;
     public GameObject hudCelular;
     public GameObject playerController;
@@ -14,6 +16,20 @@ public class CelularHud : MonoBehaviour
 
     private bool canDetectSwipe = true;
 
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Impede que o objeto GameManager seja destruído ao carregar uma nova cena
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+    }
 
 
     // Start is called before the first frame update

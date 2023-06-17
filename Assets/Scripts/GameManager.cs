@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
 
     public ProfissaoManager profissoes;
 
+    public GameObject buttonEntretenimento;
+    public GameObject lixoBtn;
+
+    public bool intro = false;
+
     private void Awake()
     {
         if (instance == null)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClockUI : MonoBehaviour
 {
@@ -8,18 +9,22 @@ public class ClockUI : MonoBehaviour
     public int dayCount;
     public float timeScale = 1f; // Fator de escala para ajustar a velocidade do tempo
 
-    private ProfissaoManager profissao;
+    public ProfissaoManager profissao;
 
     private void Start()
     {
-        profissao = FindObjectOfType<ProfissaoManager>();
-
         dayCount = 0;
         dayTime = 0;
     }
 
+
     private void Update()
     {
+        if(profissao == null)
+        {
+            profissao = FindObjectOfType<ProfissaoManager>();
+        }
+
         dayTime += Time.deltaTime * timeScale;
 
         if (dayTime >= 24)

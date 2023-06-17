@@ -1,25 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BtnEntretenimento : MonoBehaviour
 {
-    public GameObject entretenimentoBtn;
-    private EntretenimentoManager EM;
-    private GameManager GM;
+    public EntretenimentoManager EM;
+    public GameManager GM;
 
-    private void Start()
+    private Button buttonComponent;
+
+    private void Awake()
     {
         EM = FindObjectOfType<EntretenimentoManager>();
         GM = FindObjectOfType<GameManager>();
-        entretenimentoBtn.SetActive(false);
+
+        GM.buttonEntretenimento.GetComponent<Button>();
+
+        buttonComponent = GM.buttonEntretenimento.GetComponent<Button>();
+
+        buttonComponent.onClick.AddListener(OnButtonClick);
+
+        GM.buttonEntretenimento.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            entretenimentoBtn.SetActive(true);
+            GM.buttonEntretenimento.SetActive(true);
         }
     }
 
@@ -27,7 +36,7 @@ public class BtnEntretenimento : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            entretenimentoBtn.SetActive(false);
+            GM.buttonEntretenimento.SetActive(false);
         }
     }
 

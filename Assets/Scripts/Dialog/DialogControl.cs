@@ -20,16 +20,32 @@ public class DialogControl : MonoBehaviour
     private string[] sentence;
     private Dialog dialog;
 
+    private GameManager GM;
+
+    private void Awake()
+    {
+        GM = FindObjectOfType<GameManager>();
+    }
+
+
     public void Start()
     {
-        HUD.SetActive(false);
-        playerController.SetActive(false);
-        GameController.SetActive(false);
-        dialog = FindObjectOfType<Dialog>();
-        Sair.SetActive(false);
+        if(GM.intro == false)
+        {
+            HUD.SetActive(false);
+            playerController.SetActive(false);
+            GameController.SetActive(false);
+            dialog = FindObjectOfType<Dialog>();
+            Sair.SetActive(false);
 
-        string playerNickname = PlayerData.instance.playerNickname;
-        Speech(playerNickname);
+            string playerNickname = PlayerData.instance.playerNickname;
+            Speech(playerNickname);
+        }
+        else
+        {
+            dialogueObj.SetActive(false);
+        }
+
     }
 
     public void Speech(string playerNickname)
@@ -53,6 +69,7 @@ public class DialogControl : MonoBehaviour
             yield return new WaitForSeconds(1.5f); // Intervalo de tempo após a exibição de cada sentença
         }
         Sair.SetActive(true);
+        GM.intro = true;
 
     }
 

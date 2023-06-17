@@ -19,6 +19,9 @@ public class EntretenimentoManager : MonoBehaviour
         targetFillAmount = currentFillAmount;
 
         StartFill();
+
+        entretenimentoBar = GameObject.Find("EntretenimentoBar").GetComponent<Image>();
+
     }
 
     // Update is called once per frame

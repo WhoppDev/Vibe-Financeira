@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class EntradaPrefeitura : MonoBehaviour
@@ -10,17 +11,15 @@ public class EntradaPrefeitura : MonoBehaviour
     public GameObject Button;
     public GameObject player;
 
+    private Button button;
+
     private void Awake()
     {
         Button.SetActive(false);
-    }
 
-    // Start is called before the first frame update
-    void Update()
-    {
+        button = GameObject.Find("BtnEntrar").GetComponent<Button>();
 
-
-
+        button.onClick.AddListener(OnButtonClick);
     }
 
 
